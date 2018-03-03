@@ -1,0 +1,20 @@
+Validate if a given string is numeric.
+
+Have you met this question in a real interview? 
+Example
+"0" => true
+
+" 0.1 " => true
+
+"abc" => false
+
+"1 a" => false
+
+"2e10" => true
+
+const isNumber = function (s) {
+    s = s.replace(" ","");//consider about " ", we delete all blanks
+    if(s === "") return false;
+    else if(isNaN(Number(s))) return false;//if s is not a numeric, it will become NaN after Number()
+    else return true;
+}
