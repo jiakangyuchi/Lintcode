@@ -36,4 +36,4 @@ public class MovingAverage {
         else return (sum[index%s] - sum[(index - s + 1)%s]) / (s - 1);
         
     }
-}
+}//运用了数组滚动，使空间复杂度降到最低。
