@@ -1,0 +1,39 @@
+http://www.lintcode.com/en/problem/sliding-window-average-from-data-stream/
+
+Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window.
+
+Example
+MovingAverage m = new MovingAverage(3);
+m.next(1) = 1 // return 1.00000
+m.next(10) = (1 + 10) / 2 // return 5.50000
+m.next(3) = (1 + 10 + 3) / 3 // return 4.66667
+m.next(5) = (10 + 3 + 5) / 3 // return 6.00000
+
+public class MovingAverage {
+    /*
+    * @param size: An integer
+    */
+    int index = 0;
+    int s;
+    double[] sum;
+    
+    public MovingAverage(int size) {
+        
+        s = size + 1;
+        sum = new double[s];
+        
+    }
+
+    /*
+     * @param val: An integer
+     * @return:  
+     */
+    public double next(int val) {
+        
+        index ++;
+        sum[index%s] = sum[(index - 1)%s] + val;
+        if(index < s) return sum[index%s] / index;
+        else return (sum[index%s] - sum[(index - s + 1)%s]) / (s - 1);
+        
+    }
+}
