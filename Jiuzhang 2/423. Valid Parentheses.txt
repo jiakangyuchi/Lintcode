@@ -8,12 +8,12 @@ The brackets must close in the correct order, "()" and "()[]{}" are all valid bu
 
 
 const isValidParentheses = function (s) {
-    var map = {
+    let map = {
         '(': ')',
         '[': ']',
         '{': '}'
     };
-    var arr = [];
+    let arr = [];
     for(let i = 0; i < s.length; i ++){
         if(i === 0){
             if(!map[s[0]]) return false; 
@@ -24,8 +24,8 @@ const isValidParentheses = function (s) {
             arr.pop();
             continue;   
         }
-        else if(!map[s[i]]) return false;
-        else arr.push(s[i]);
+        if(!map[s[i]]) return false;
+        arr.push(s[i]);
     }
     return arr.length === 0;
 }
