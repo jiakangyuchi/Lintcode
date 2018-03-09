@@ -1,0 +1,56 @@
+http://www.lintcode.com/en/problem/substring-anagrams/
+
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 40,000.
+
+The order of output does not matter.
+
+Example
+Given s = "cbaebabacd" p = "abc"
+
+return [0, 6]
+
+The substring with start index = 0 is "cba", which is an anagram of "abc".
+The substring with start index = 6 is "bac", which is an anagram of "abc".
+
+const findAnagrams = function (s, p) {
+    let res = [];
+    let len = p.length;
+    let map_p = {};
+    let prev;
+    for(let i = 0; i < len; i ++){
+        map_p[p[i]] = (map_p[p[i]] || 0) + 1;
+    }
+    for(let i = 0; i < s.length - len + 1; i ++){
+        if(prev === true && s[i - 1] === s[i + len - 1]){
+            res.push(i);
+            continue;
+        }
+        else if(prev === true && s[i - 1] !== s[i + len - 1]){
+            prev = false;
+            continue;
+        }
+        else if(prev === false && s[i - 1] === s[i + len -1]) continue;
+        else {
+            compare(i, map_p);
+            continue;
+        }
+    }
+    function compare(idx, map_y){
+        let x = s.slice(idx, idx + len);
+        let map_x = {};
+        for(let j = 0; j < len; j ++){
+            map_x[x[j]] = (map_x[x[j]] || 0) + 1;
+        }
+        for(var m in map_x){
+            if(map_x[m] !== map_y[m]){
+                prev = false;
+                return;
+            }
+        }
+        prev = true;
+        res.push(idx);
+    }
+    return res;
+}
