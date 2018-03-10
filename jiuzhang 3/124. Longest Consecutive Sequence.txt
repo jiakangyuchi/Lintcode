@@ -35,4 +35,4 @@ const longestConsecutive = function (num) {
         cur = 0;
     }
     return res;
-}
+}//O(n)，有点像DFS，查过的元素就删掉不在搜索。
